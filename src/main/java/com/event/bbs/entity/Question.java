@@ -30,21 +30,16 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(length = 200)
+	private String content;
+
 	//질문 번호
 	@Column
 	private Integer qNum;
 
-	@Column(length = 200)
-	private String content;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="event_id")
 	private Event event;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="answer_id")
-	private Answer answer;
-
 
 
 }

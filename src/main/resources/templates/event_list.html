@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>event_list</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="event : ${eventList}">
+        <td>
+            <a th:href="@{|/event/detail/${event.id}|}"   th:text="${event.subject}"></a>
+          </td>
+        <td th:text="${event.createDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+

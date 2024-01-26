@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>event_list</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>에러 페이지</th>
+    </tr>
+    </thead>
+    <tbody>
+     <td th:text="${error.code}" > </td>
+     <td th:text="${error.message}"></td>
+    </tbody>
+</table>
+</body>
+</html>

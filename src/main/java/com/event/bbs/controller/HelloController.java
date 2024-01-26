@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-	@GetMapping("/hello")
+	@GetMapping("/sbb")
 	@ResponseBody
-	public String hello(){
+	public String index(){
 
 		return "hello";
+	}
+
+	@GetMapping("/")
+	public String root(){
+
+		return "redirect:/event/list";
 	}
 }

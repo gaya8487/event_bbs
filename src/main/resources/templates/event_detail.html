@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>event_list</title>
+    <h1 th:text="${event.subject}"></h1>
+    <div th:text="${event.content}"></div>
+</head>
+<body>
+<input id="eventId" th:value="${event.id}" style="display:none">
+
+<div id="question">
+    퀴즈 목록
+<!--    <form th:action="@{|/question/create/${event.id}|}" method="post">-->
+        <div id="questions-container">
+            <!-- 동적으로 추가될 질문 입력 창들이 들어갈 컨테이너 -->
+            <div  th:each="question,itemStat : ${event.questionList}" th:attrappend="data-question-number=${question.qNum}">
+<!--                <span th:text="${question.qNum}" ></span>-->
+                <input id="questionContent" th:value="${question.content}">
+                <button type="button" onclick="removeQuestion(this)">-</button>
+            </div>
+        </div>
+        <button type="button" onclick="addQuestion()">+ 질문 추가</button>
+        <button onclick="submitQuestions()">질문 제출</button>
+<!--    </form>-->
+</div>
+<!--    <div id="answer">-->
+<!--        답변 목록-->
+<!--        <tr th:each="answer : ${event.answerList}">-->
+<!--            <td th:text="${answer.qNum}"></td>-->
+<!--            <td th:text="${answer.content}"></td>-->
+<!--        </tr>-->
+<!--    </div>-->
+
+<!--    <div id="player">-->
+<!--        참가자 목록-->
+<!--        <tr th:each="player : ${event.playerList}">-->
+<!--            <td th:text="${player.name}"></td>-->
+<!--        </tr>-->
+<!--    </div>-->
+
+<script>
+
+        let questionList = document.querySelectorAll("[data-question-number]");
+        let questionCount = questionList.length;
+
+        function addQuestion() {
+            const container = document.getElementById('questions-container');
+            const wrapperDiv = document.createElement('div');
+           //const qNumSpan = document.createElement('span');
+
+            const input = document.createElement('input');
+            input.setAttribute('placeholder', '질문을 입력하세요');
+
+            questionCount++;
+            wrapperDiv.setAttribute('data-question-number', questionCount);
+            //qNumSpan.innerHTML = questionCount;
+
+            //questions.push({ number: questionCount, input });
+
+            const removeButton = document.createElement('button');
+            removeButton.setAttribute('type','button');
+            removeButton.innerText = '-';
+            removeButton.addEventListener('click', function() {
+                console.log(questionCount);
+                if (questionCount > 1) {
+                    container.removeChild(wrapperDiv);
+                    questionCount--;
+                }
+            });
+
+            //wrapperDiv.appendChild(qNumSpan);
+            wrapperDiv.appendChild(input);
+            wrapperDiv.appendChild(removeButton);
+            container.appendChild(wrapperDiv);
+
+        }
+
+        function removeQuestion(button) {
+            const container = document.getElementById('questions-container');
+            const questionList = document.querySelectorAll("[data-question-number]");
+
+            //console.log(button);
+            //console.log(button.parentElement);
+            //console.log(questionList);
+            //console.log(questionCount);
+
+             if (questionCount> 1) {
+                 button.parentElement.remove();
+                 questionCount--;
+              }
+        }
+
+        function submitQuestions() {
+            const questionList = document.querySelectorAll("[data-question-number]");
+            const questions = [];
+            const eventId = document.getElementById("eventId").value;
+
+            console.log(questionList);
+            console.log(questionList.length);
+
+            questionList.forEach((value,index)=> {
+                let innerText = value.querySelector('input').value;
+                questions.push({number:index,innerText });
+            });
+
+            console.log(questions);
+
+            const questionContents = questions.map(item => {
+                return {
+                    qNum: item.number,
+                    subject: item.innerText,
+                };
+            });
+
+             console.log(questionContents)
+
+            fetch('/question/create/'+eventId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(questionContents),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // 서버에서 받아온 데이터로 화면 갱신 없이 진행할 경우
+                // window.location.href = '/question-page';
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -34,8 +34,4 @@ public class Player {
 	@JoinColumn(name="event_id")
 	private Event event;
 
-	@OneToOne
-	@JoinColumn(name="answer_id")
-	private Answer answer;
-
 }
