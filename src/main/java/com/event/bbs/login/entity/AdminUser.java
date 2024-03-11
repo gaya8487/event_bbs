@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.event.bbs.web.entity.Event;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,17 +28,17 @@ public class AdminUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotNull
+	@NotEmpty
 	@Column(unique = true)
 	private String loginId;
 
-	@NotNull
+	@NotEmpty
 	private  String name;
 
-	@NotNull
+	@NotEmpty
 	private String password;
 
-	@NotNull
+	@NotEmpty
 	@Column(unique = true)
 	private String email;
 

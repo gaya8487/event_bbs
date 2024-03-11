@@ -1,6 +1,8 @@
 package com.event.bbs.web.dto.requestDto;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,15 +16,18 @@ import lombok.Setter;
 @Builder
 public class AdminUserFormDto {
 
-	@NotNull
+
+	@Size(min=3, max=15)
+	@NotEmpty
 	private String loginId;
 
-	@NotNull
+	@NotEmpty
 	private String name;
 
-	@NotNull
+	@NotEmpty
 	private String password;
 
-	@NotNull
+	@NotEmpty
+	@Email
 	private String email;
 }

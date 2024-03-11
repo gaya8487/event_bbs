@@ -2,6 +2,7 @@ package com.event.bbs.login.service;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.event.bbs.login.entity.AdminUser;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminUserService {
 
 	private final AdminUserRepository adminUserRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public void create(AdminUserFormDto  adminUserFormDto){
 
@@ -25,7 +27,7 @@ public class AdminUserService {
 				.email(adminUserFormDto.getEmail())
 				.name(adminUserFormDto.getName())
 				.loginId(adminUserFormDto.getLoginId())
-				.password(adminUserFormDto.getPassword())
+				.password(passwordEncoder.encode(adminUserFormDto.getPassword()))
 			.build());
 	}
 	public Optional<AdminUser> findByLoginId(String  loginId) {

@@ -1,17 +1,22 @@
 package com.event.bbs.web.controller;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.event.bbs.web.dto.requestDto.AdminUserFormDto;
 import com.event.bbs.login.service.AdminUserService;
+import com.event.bbs.web.common.ErrorMessage;
+import com.event.bbs.web.dto.requestDto.AdminUserFormDto;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
@@ -25,16 +30,23 @@ public class AdminUserController {
 	}
 
 	@PostMapping("/create")
-	public String save( @ModelAttribute AdminUserFormDto adminUserFormDto , BindingResult bindingResult){
+	public String save(@Validated @ModelAttribute("member") AdminUserFormDto adminUserFormDto , BindingResult bindingResult){
 
-		adminUserFormDto.toString();
+			log.debug(adminUserFormDto.toString());
 
-		if (bindingResult.hasErrors()){
-			return "members/addMemberForm";
-		}
+			if (bindingResult.hasErrors()){
+				return "members/addMemberForm";
+			}
 
-		adminUserService.create(adminUserFormDto);
-		return "home";
+			try{
+				adminUserService.create(adminUserFormDto);
+			}catch (DataIntegrityViolationException e){
+				e.printStackTrace();
+				bindingResult.reject(ErrorMessage.SIGN_UP_FAIL.getName(),ErrorMessage.SIGN_UP_FAIL.getExplain());
+				return "members/addMemberForm";
+			}
+
+		return "redirect:/";
 
 	}
 

@@ -31,8 +31,8 @@
                             <td>
                                 <input  th:name="|question[${stat.index}].content|" th:value="${question.getContent()}"/>
                             </td>
-                            <input type="submit" name="수정"  value="edit"  th:formaction="'/question/modify'+'/'+${event.id}+'/'+${question.qNum}">
-                            <input type="submit" name="삭제" value="delete"  th:formaction="'/question/delete'+'/'+${event.id}+'/'+${question.qNum}">
+<!--                            <input type="submit" name="수정"  value="edit"  th:formaction="'/question/modify'+'/'+${event.id}+'/'+${question.qNum}">-->
+<!--                            <input type="submit" name="삭제" value="delete"  th:formaction="'/question/delete'+'/'+${event.id}+'/'+${question.qNum}">-->
                     </tr >
                     <input type="text" id="addQuiz" name="addQuiz"   placeholder="퀴즈를 입력하세요">
                     <input type="submit" value="퀴즈 추가">

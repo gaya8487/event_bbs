@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.event.bbs.login.entity.AdminUser;
+import com.event.bbs.web.common.SessionConst;
 import com.event.bbs.web.dto.EventDto;
 import com.event.bbs.web.dto.QuestionDto;
 import com.event.bbs.web.entity.Event;
@@ -23,7 +26,12 @@ public class EventController {
 
 	private final EventService eventService;
 	@GetMapping("/list")
-	public String list(Model model){
+	public String list(@SessionAttribute(name= SessionConst.LOGIN_MEMBER,required = false) AdminUser adminUser, Model model){
+
+		//세션에 회원 데이터가 없으면 홈으로
+		if(adminUser == null){
+			return "home";
+		}
 
 		//todo: 로그인한 사용자가 만든 이벤트만 조회
 
