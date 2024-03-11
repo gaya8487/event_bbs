@@ -1,10 +1,10 @@
-package com.event.bbs.login.repository;
+package com.event.bbs.web.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.event.bbs.login.entity.AdminUser;
+import com.event.bbs.web.entity.AdminUser;
 
 
 public interface AdminUserRepository  extends JpaRepository<AdminUser,Integer> {

@@ -1,4 +1,4 @@
-package com.event.bbs.login.entity;
+package com.event.bbs.web.entity;
 
 import java.util.List;
 
@@ -16,11 +16,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@ToString
 @Entity
 public class AdminUser {
 

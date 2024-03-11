@@ -1,12 +1,12 @@
-package com.event.bbs.login.service;
+package com.event.bbs.web.service;
 
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.event.bbs.login.entity.AdminUser;
-import com.event.bbs.login.repository.AdminUserRepository;
+import com.event.bbs.web.entity.AdminUser;
+import com.event.bbs.web.repository.AdminUserRepository;
 import com.event.bbs.web.dto.requestDto.AdminUserFormDto;
 
 import lombok.RequiredArgsConstructor;

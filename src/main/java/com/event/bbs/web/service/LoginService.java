@@ -1,8 +1,9 @@
-package com.event.bbs.login.service;
+package com.event.bbs.web.service;
 
+import com.event.bbs.web.service.AdminUserService;
 import org.springframework.stereotype.Service;
 
-import com.event.bbs.login.entity.AdminUser;
+import com.event.bbs.web.entity.AdminUser;
 import com.event.bbs.web.dto.requestDto.LoginFormDto;
 
 import lombok.RequiredArgsConstructor;

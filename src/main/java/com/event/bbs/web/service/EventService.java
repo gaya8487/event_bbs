@@ -18,7 +18,7 @@ public class EventService {
 
 	private final EventRepository eventRepository;
 
-	public List<Event> getEventList(){
+	public List<Event> getAllEventList(){
 		List<Event> eventList = this.eventRepository.findAll();
 		return eventList;
 	}
@@ -28,13 +28,15 @@ public class EventService {
 		Optional<Event> event = eventRepository.findById(id);
 
 		if (event.isPresent()) {
-
 			return event.get();
-
 		} else {
 			throw new BaseException(ErrorStatus.DATA_NOT_FOUND);
 		}
 	}
 
+	public List<Event> getEventListByAdminUserId(int userId) {
 
+		return eventRepository.findByAdminUser_Id(userId);
+
+	}
 }

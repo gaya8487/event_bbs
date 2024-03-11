@@ -3,8 +3,6 @@ package com.event.bbs.web.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.event.bbs.login.entity.AdminUser;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Getter
@@ -27,6 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
+@ToString
 public class Event {
 
 	@Id

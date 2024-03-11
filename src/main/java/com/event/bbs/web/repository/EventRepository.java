@@ -1,8 +1,11 @@
 package com.event.bbs.web.repository;
 
+import com.event.bbs.web.entity.Event;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.event.bbs.web.entity.Event;
-
 public interface EventRepository  extends JpaRepository<Event,Integer> {
+
+  List<Event> findByAdminUser_Id(int adminUserId);
+
 }

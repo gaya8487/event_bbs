@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-<head>
-    <meta charset="UTF-8">
-    <title>event_list</title>
-</head>
-<body>
-    <div class="container my-3">
-
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성일시</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="event,loop : ${eventList}">
-                    <td th:text="${loop.count}"></td>
-                    <td>
-                        <a th:href="@{|/event/detail/${event.id}|}"   th:text="${event.subject}"></a>
-                    </td>
-                    <td th:text="${#temporals.format(event.createDate,'yyyy-MM-dd HH:mm')}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
+<html layout:decorate="~{layout}"  lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>event_list</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container my-3">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성일시</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="event,loop : ${eventList}">
+                            <td th:text="${loop.count}"></td>
+                            <td>
+                                <a th:href="@{|/event/detail/${event.id}|}"   th:text="${event.subject}"></a>
+                            </td>
+                            <td th:text="${#temporals.format(event.createDate,'yyyy-MM-dd HH:mm')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            <button>설문조사 만들기</button>
+        </div>
+    </body>
 </html>
 

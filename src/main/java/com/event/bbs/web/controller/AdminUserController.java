@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.event.bbs.login.service.AdminUserService;
+import com.event.bbs.web.service.AdminUserService;
 import com.event.bbs.web.common.ErrorMessage;
 import com.event.bbs.web.dto.requestDto.AdminUserFormDto;
 
